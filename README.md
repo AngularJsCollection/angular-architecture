@@ -1,4 +1,7 @@
 angular-architecture
 ====================
 
-AngularJS Architecture Cheat Sheet
+AngularJS Architecture Template/Checklist
+
+# Purpose
+To create a sustainable large project
