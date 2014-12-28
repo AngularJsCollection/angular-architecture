@@ -1,0 +1,56 @@
+<h2>Send Push Notification</h2>
+<ol class="breadcrumb">
+    <li><a ui-sref="dashboard.sendpush({uid : undefined})" ng-class="uidIsLoaded ? '' : 'active'">Send Push</a></li>
+    <li class="active" ng-show="uidIsLoaded" ng-bind="active.data.fname + ' ' + active.data.lname"></li>
+</ol>
+<div class="location lid" ng-show="uidIsLoaded">
+    <h3>User Info</h3>
+    <table class="location-specific detail-table">
+        <tr>
+            <td colspan="2"><img src="https://graph.facebook.com/{{active.data.loginid}}/picture"/></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td ng-bind="active.data.fname + ' ' + active.data.lname"></td>
+        </tr>
+        <tr>
+            <td>Last Active</td>
+            <td ng-bind="active.data.lastActiveTime | timeDifference"></td>
+        </tr>
+        <tr>
+            <td>Device Token Exists</td>
+            <td><i ng-class="active.data.loginid % 3 != 0 ? 'fa fa-check fa-fw green fa-lg' : 'fa fa-fw fa-code red fa-lg'"></i></td>
+        </tr>
+        <tr>
+            <td>Number of Friends</td>
+            <td ng-bind="active.data.friendCount"></td>
+        </tr>
+        <tr>
+            <td>Amount of Money Spent</td>
+            <td ng-bind="active.data.moneySpent | currency:'USD$' : 2"></td>
+        </tr>
+    </table>
+</div>
+<div ng-hide="uidIsLoaded">
+    <div class="profile action">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Search" ng-model="searchProfile" aria-describedby="sizing-addon1">
+        </div>
+    </div>
+    <table class="detail-table">
+        <thead>
+        <tr>
+            <td class="pointer" ng-repeat="header in profileHeader" ng-bind="header.label" ng-click="changeFilter(header.key)"></td>
+        </tr>
+        </thead>
+        <tr ui-sref="dashboard.sendpush({uid:profile.loginid})" ng-if="profile.deviceToken.length>0" ng-repeat="profile in profiles | filter: searchProfile | orderBy: searchKeyword : searchReverse" ng-class="$index % 2 == 0 ? 'nice-blue pointer' : 'white pointer'" >
+            <td><input type="checkbox" aria-label="label" ng-model="profile.selected"></td>
+            <td><img src="https://graph.facebook.com/{{profile.loginid}}/picture"/></td>
+            <td ng-bind="profile.fname"></td>
+            <td ng-bind="profile.lname"></td>
+            <td ng-bind="profile.lastActiveTime | timeDifference"></td>
+            <td ng-bind="profile.distance"></td>
+            <td><i ng-class="profile.deviceToken.length > 0 ? 'fa fa-check fa-fw green' : 'fa fa-fw fa-code red'"></i></td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,60 @@
+<h2>Location</h2>
+<ol class="breadcrumb">
+    <li><a ui-sref="dashboard.location({lid : undefined})" ng-class="loadLid ? '' : 'active'">Location</a></li>
+    <li class="active" ng-show="loadLid" ng-bind="active.data.location.name"></li>
+</ol>
+<div class="location lid" ng-show="loadLid">
+    <h3>Location Info</h3>
+    <table class="location-specific detail-table">
+        <tr>
+            <td>Name</td>
+            <td ng-bind="active.data.location.name"></td>
+        </tr>
+        <tr>
+            <td>Address</td>
+            <td ng-bind="active.data.location.address + ', ' + active.data.location.city"></td>
+        </tr>
+    </table>
+    <h3>Events Info</h3>
+    <table class="location-events detail-table" ng-show="active.data.events.length > 0">
+        <thead>
+            <tr>
+                <td>Name</td>
+                <td>Attending</td>
+                <td>Start Time</td>
+                <td>End Time</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="event in active.data.events">
+                <td ng-bind="event.theme"></td>
+                <td ng-bind="event.attendingCount"></td>
+                <td ng-bind="event.startTime"></td>
+                <td ng-bind="event.endTime"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div ng-hide="loadLid">
+    <div class="location action">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control" placeholder="Search" ng-model="searchLocation" aria-describedby="sizing-addon1">
+        </div>
+    </div>
+    <table class="detail-table">
+        <thead>
+            <tr>
+                <td ng-repeat="header in locationHeader" ng-bind="header"> </td>
+            </tr>
+        </thead>
+        <tr ng-repeat="location in locations | filter: searchLocation" ng-class="$index % 2 == 0 ? 'nice-blue pointer' : 'white pointer'" ui-sref="dashboard.location({lid:location.lid})">
+            <td ng-bind="location.name"></td>
+            <td ng-bind="location.address + ', ' + location.city"></td>
+            <td ng-bind="location.rating"></td>
+            <td>
+                <i class="fa fa-edit fa-lg fa-fw"></i>
+                <i class="fa fa-trash-o fa-lg fa-fw"></i>
+            </td>
+        </tr>
+    </table>
+</div>

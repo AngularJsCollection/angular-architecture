@@ -1,0 +1,17 @@
+<h2>Graph</h2>
+<div class="header-subtitle stats-graph">
+    <i class="fa fa-fw fa-file-text-o"></i>
+    <a ui-sref="dashboard.stats.table">Go back to table</a>
+    <div class="dropdown" style="margin:15px;">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" ng-bind="currentSelection">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation" ng-repeat="header in headers" ng-if="$index > 0"><a role="menuitem" tabindex="-1" ui-sref="dashboard.stats.graph({graphType : header.yVar})" ng-bind="header.label"></a></li>
+        </ul>
+    </div>
+</div>
+
+
+<div google-chart chart="chartObject" style="{{cssStyle}}"></div>
+

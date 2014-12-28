@@ -1,0 +1,22 @@
+<h2 class="title">Stats</h2>
+<div class="header-subtitle stats-table">
+    <i class="fa fa-fw fa-line-chart"></i>
+    <a ui-sref="dashboard.stats.graph">View in Graph</a>
+</div>
+<table class="detail-table">
+    <thead>
+        <tr>
+            <td class="pointer" ng-repeat="header in headers" ui-sref="dashboard.stats.graph({graphType : header.yVar})" ng-bind="header.label"></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="pointer" ui-sref="dashboard.stats.graph({ graphType : 'totalUsers' })" ng-repeat="d in tableData | orderBy:'timestamp' :true" ng-class="$index < 1 ? 'warning' : ($index % 2 == 0 ? 'nice-blue' : 'white')">
+            <td ng-bind="d.timestamp"></td>
+            <td ng-bind="d.totalUsers | numberFmt"></td>
+            <td ng-bind="d.timeSpent"></td>
+            <td ng-bind="d.daumau"></td>
+            <td ng-bind="d.dauwau"></td>
+            <td ng-bind="d.waumau"></td>
+        </tr>
+    </tbody>
+</table>

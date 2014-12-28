@@ -1,0 +1,32 @@
+<html ng-app="dashboard">
+<head>
+    <title>Admin Portal</title>
+    <script src="common/lib/js/jquery.min.js"></script>
+    <link href="main/sidebar/sidebar.css" rel="stylesheet"type="text/css" />
+    <link href="common/style/common.css" rel="stylesheet"type="text/css" />
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="common/lib/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="common/lib/css/bootstrap-theme.min.css" rel="stylesheet"  type="text/css" />
+    <script src="common/lib/js/bootstrap.min.js"></script>
+    <link href="main/header/header.css" rel="stylesheet" type="text/css"/>
+</head>
+<body ng-controller="MainCtrl">
+    <div class="wrapper">
+        <div class="header">
+            <header></header>
+        </div>
+        <sidebar></sidebar>
+        <div class="detail">
+            <div ui-view></div>
+        </div>
+    </div>
+    <script src="common/lib/js/angular.js"></script>
+    <script src="common/lib/js/angular-mocks.js"></script>
+    <script src="common/lib/js/angular-ui-router.js"></script>
+    <script src="common/lib/js/ocLazyLoad.js"></script>
+    <script src="common/app.config.js"></script>
+    <script src="common/filter/common_filter.js"></script>
+    <script src="main/main_directive.js"></script>
+</body>
+
+</html>
