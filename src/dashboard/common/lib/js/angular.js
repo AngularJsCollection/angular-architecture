@@ -18629,7 +18629,7 @@
          * Input with date validation and transformation. In browsers that do not yet support
          * the HTML5 date input, a text element will be used. In that case, text must be entered in a valid ISO-8601
          * date format (yyyy-MM-dd), for example: `2009-01-06`. Since many
-         * modern browsers do not yet support this input type, it is important to provide cues to users on the
+         * modern browsers do not yet support this input type, it is important to provide cues to user on the
          * expected input format via a placeholder or label.
          *
          * The model must always be a Date object, otherwise Angular will throw an error.
@@ -19467,7 +19467,7 @@
         var placeholder = element[0].placeholder, noevent = {};
         var type = lowercase(element[0].type);
 
-        // In composition mode, users are still inputing intermediate text buffer,
+        // In composition mode, user are still inputing intermediate text buffer,
         // hold the listener until composition is done.
         // More about composition events: https://developer.mozilla.org/en-US/docs/Web/API/CompositionEvent
         if (!$sniffer.android) {
@@ -20110,7 +20110,7 @@
  *   var value = modelValue || viewValue;
  *
  *   // Lookup user by username
- *   return $http.get('/api/users/' + value).
+ *   return $http.get('/api/user/' + value).
  *      then(function resolved() {
  *        //username exists, this means validation fails
  *        return $q.reject('exists');

@@ -44,7 +44,10 @@
     <table class="detail-table">
         <thead>
             <tr>
-                <td ng-repeat="header in locationHeader" ng-bind="header"> </td>
+                <td>Name</td>
+                <td>Address</td>
+                <td>Rating</td>
+                <td>Action</td>
             </tr>
         </thead>
         <tr ng-repeat="location in locations | filter: searchLocation" ng-class="$index % 2 == 0 ? 'nice-blue pointer' : 'white pointer'" ui-sref="dashboard.location({lid:location.lid})">

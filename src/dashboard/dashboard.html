@@ -9,6 +9,7 @@
     <link href="common/lib/css/bootstrap-theme.min.css" rel="stylesheet"  type="text/css" />
     <script src="common/lib/js/bootstrap.min.js"></script>
     <link href="main/header/header.css" rel="stylesheet" type="text/css"/>
+    <link href="common/lib/css/growl.css" rel="stylesheet" type="text/css"/>
 </head>
 <body ng-controller="MainCtrl">
     <div class="wrapper">
@@ -17,6 +18,7 @@
         </div>
         <sidebar></sidebar>
         <div class="detail">
+
             <div ui-view></div>
         </div>
     </div>
@@ -24,9 +26,18 @@
     <script src="common/lib/js/angular-mocks.js"></script>
     <script src="common/lib/js/angular-ui-router.js"></script>
     <script src="common/lib/js/ocLazyLoad.js"></script>
+    <script src="common/lib/js/angular-animate.js"></script>
+    <script src="common/lib/js/growl/growl.js"></script>
+    <script src="common/lib/js/growl/growl_directive.js"></script>
+    <script src="common/lib/js/growl/growl_factory.js"></script>
+
     <script src="common/app.config.js"></script>
     <script src="common/filter/common_filter.js"></script>
     <script src="main/main_directive.js"></script>
+<script src="common/factory/loading_factory.js"></script>
+<script src="common/factory/operator_factory.js"></script>
+<script src="common/factory/filter_manager_factory.js"></script>
+
 </body>
 
 </html>

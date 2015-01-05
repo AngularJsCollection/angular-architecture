@@ -15,6 +15,11 @@ sidebar { position:fixed; left:0; top:65px; }
 
 .header-subtitle { margin-left: 50px; }
 
+div.filter-container { width:95%; margin: 10px auto; border:2px solid rgba(0,0,0,0.2);  border-radius:15px; }
+div.filter-container > .filter-result { width:100%;}
+div.filter-container > .filter-result > .current-filters { background-color: rgba(0,0,255,0.1);border:0px;}
+div.filter-container > .filter-option { margin: 0 auto; width:50%; }
+
 table.detail-table{ font-size:11px; width:95%; border-collapse: separate !important; border-radius:15px; margin:auto; text-align:center;border:2px solid rgba(0,0,0,0.2); color:rgba(0,0,0,0.8); font-family:Arial;}
 table.detail-table td{ padding:10px; width:7.7%;}
 table.detail-table td .detail-table{ background-color:#e74c3c; text-decoration: none; color:black; font-size:10px; }

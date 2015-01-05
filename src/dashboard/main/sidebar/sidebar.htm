@@ -1,13 +1,3 @@
-
-<div class="side-navigation-status">
-    <span ng-show="isLoading">
-        <i class="fa fa-refresh fa-spin"></i>Loading..
-    </span>
-    <span ng-hide="isLoading">
-        <i class="fa fa-thumbs-o-up"></i>100% Loaded
-    </span>
-</div>
-
 <div class="side-navigation">
     <ul class="nav nav-pills nav-stacked ">
         <li ng-repeat="row in sideMenu" role="presentation"  ui-sref-active="active"><a  ui-sref="{{row.state}}"><i ng-class="row.icon"></i>{{row.label}}</a></li>

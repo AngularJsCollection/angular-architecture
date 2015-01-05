@@ -11,7 +11,7 @@ var app = angular.module('dashboard', ['ui.router', 'oc.lazyLoad'])
                 template: "<div ui-view></div>",
                 controller: 'MainCtrl',
                 resolve: {
-                    modules : function($ocLazyLoad){
+                    dashboard : function($ocLazyLoad){
                         return $ocLazyLoad.load({
                             name: "dashboard",
                             files: ['common/factory/array_factory.js']
@@ -59,26 +59,26 @@ var app = angular.module('dashboard', ['ui.router', 'oc.lazyLoad'])
                     }
                 }
             })
-            .state('dashboard.sendpush', {
-                templateUrl : 'apps/sendpush/template/sendpush_template.htm',
-                controller : 'SendpushCtrl',
-                url : 'sendpush/:uid',
+            .state('dashboard.user', {
+                templateUrl : 'apps/user/template/user_template.htm',
+                controller : 'UserCtrl',
+                url : 'user/:uid',
                 resolve: {
                     ctrl : function($ocLazyLoad) {
                         return $ocLazyLoad.load({
-                            name: "dashboard.sendpush",
-                            files: ['apps/sendpush/sendpush_controller.js']
+                            name: "dashboard.user",
+                            files: ['apps/user/user_controller.js','apps/user/js/user_directive.js', 'apps/user/style/user_style.css']
                         });
                     },
-                    uid : function($stateParams){
+                    uid : ['$stateParams','ctrl', function($stateParams, ctrl){
                         return $stateParams.uid;
-                    }
+                    }]
                 }
             })
             .state('dashboard.location', {
                 templateUrl : "apps/location/template/location_template.htm",
                 controller: 'LocationCtrl',
-                url: "location/:lid",
+                url: "location/:lid/:name",
                 resolve: {
                     ctrl: function($ocLazyLoad){
                         return $ocLazyLoad.load({
@@ -87,29 +87,70 @@ var app = angular.module('dashboard', ['ui.router', 'oc.lazyLoad'])
                         });
                     },
                     lid: function($stateParams){
+                        $stateParams.lid = $stateParams.lid || 'all';
+
                         return $stateParams.lid;
-                    }
+                    },
+                    getName: ['$q','$timeout', function($q, $timeout){
+                        var deferred = $q.defer();
+                        $timeout(function() {
+                            var names = ['Cool Place', 'Awesome place', 'boring place', 'I want to be here', 'Random Venue'];
+                            deferred.resolve(names[ Math.round(Math.random()*4) ]);
+                        }, 100);
+                        return deferred.promise;
+                    }],
+                    name : ['lid', '$state','$stateParams','getName', function (lid, $state, $stateParams,getName) {
+
+                        if($stateParams.lid.length < 1 || $stateParams.lid == 'all'){ // show all or not set Location ID
+                            $stateParams.name = '';
+                            return '';
+                        }
+                        if($stateParams.name.length > 0){ // if the name is already specified, it's ok. settle
+                            return $stateParams.name;
+                        }
+
+                        // hyphens are better than %20 in the url
+                        getName = getName.replace(/\s/g,'-');
+
+                        $state.transitionTo('dashboard.location', {lid:lid, name:getName}, {
+                            reload:true,
+                            inherit:false,
+                            notify:true
+                        })
+                    }]
+                }
+            })
+            .state('dashboard.notification', {
+                templateUrl: "apps/notification/template/notification_template.htm",
+                controller: 'NotificationCtrl',
+                url: "notification",
+                resolve:{
+
                 }
             })
     })
-    .controller('MainCtrl', ['$scope', '$filter', function($scope, $filter){
+    .controller('MainCtrl', ['$scope', '$filter', 'LoadingManager', function($scope, $filter, Loading){
+        $scope.$on('$stateChangeStart', function () {
+            Loading.start($scope);
+        })
+        $scope.$on('$stateChangeError', function () {
+            Loading.stop($scope.$id);
+        })
+        $scope.$on('$stateNotFound', function () {
+            Loading.stop($scope.$id);
+        })
+        $scope.$on('$stateChangeSuccess', function () {
+            Loading.stop($scope.$id);
+        })
 
-        $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
-            // TODO Error Handling
-        });
-        $scope.$on('$stateChangeStart', function(ev, toSt, toPrm, frmSt, frmPrm){
-           // TODO Log User Interaction
-        })
-        $scope.$on('$stateNotFound ',function(event, unfoundState, fromState, fromParams){
-            // TODO Error Handling
-        })
-
-        $scope.$on('onChangeLoadingState', function(event, data){
-            $scope.isLoading = data;
-            // TODO change this to UI Handler
-        })
+        $scope.$watch(function(){
+            return Loading.isLoading();
+        }, function(newVal){
+            $scope.isLoading = newVal;
+        }, true);
 
         $scope.$on('onError', function(event, data){
+            Loading.stop($scope.$id);
             // TODO error handling factory needed
             $scope.showError = data.isError;
             $scope.errorMessage = data.errorMessage;
@@ -117,8 +158,9 @@ var app = angular.module('dashboard', ['ui.router', 'oc.lazyLoad'])
 
         $scope.sideMenu = [];
         $scope.sideMenu.push({ state : 'dashboard.stats.table', label : 'Stats', icon : 'fa fa-area-chart'});
-        $scope.sideMenu.push({ state : 'dashboard.sendpush', label : 'Send Push', icon : 'fa fa-comment-o'});
+        $scope.sideMenu.push({ state : 'dashboard.user', label : 'Users', icon : 'fa fa-comment-o'});
         $scope.sideMenu.push({ state : 'dashboard.location', label : 'Locations', icon : 'fa fa-location-arrow'});
+      //  $scope.sideMenu.push({ state : 'dashboard.notification', label : ' Notification', icon : 'fa fa-exclamation'});
 
 
     }]);

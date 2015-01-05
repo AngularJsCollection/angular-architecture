@@ -1,0 +1,86 @@
+
+<div class="filter-container">
+    <div class="filter-result">
+        <div class="list-group">
+            <a ng-class="'list-group-item pointer ' + ($index < 1 ? 'active' : '')" ng-mouseover="fil.mouse = true" ng-mouseleave="fil.mouse = false" ng-repeat="fil in currentFilters" ng-click="removeFilter(fil.uid)">
+                <i class="fa fa-times red"></i>&nbsp;
+                <span ng-bind="'(' + fil.matchCount + '/' + Filters.data.length + ') ' + fil.variableLabel + ' ' + fil.operatorLabel + ' ' + fil.value"></span>
+            </a>
+        </div>
+    </div>
+    <div class="filter-option eighty">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" ng-bind="potentialfilter.label"><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation" ng-repeat="header in filterKeys">
+                                    <a role="menuitem" tabindex="-1" ng-click="potentialfilter.label = header.label; potentialfilter.labelkey = header.key; potentialfilter.postFix = header.postFix;" ng-bind="header.label"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" ng-bind="potentialfilter.operator"><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation" ng-repeat="operator in Filters.operators">
+                                    <a role="menuitem" tabindex="-1" ng-click="potentialfilter.operator = operator.label; potentialfilter.operatorkey = operator.key" ng-bind="::operator.label"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <form class="navbar-form navbar-left">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-model="potentialfilter.value" placeholder="">
+                            </div>
+                        </form>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle"  ng-bind="potentialfilter.postFix"><b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation" ng-repeat="header in filterKeys">
+                                    <a role="menuitem" tabindex="-1" ng-click="potentialfilter.label = header.label; potentialfilter.labelkey = header.key; potentialfilter.postFix = header.postFix;" ng-bind="header.postFix"></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <form class="navbar-form navbar-left">
+                            <button ng-click="addFilter( potentialfilter.labelkey, potentialfilter.label, potentialfilter.operatorkey,  potentialfilter.operator, potentialfilter.value + ' ' + potentialfilter.postFix)" class="btn btn-default" type="button" >
+                                Add Filter
+                            </button>
+                        </form>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <form class="navbar-form navbar-left">
+                            <button ng-click="toggleShown(true)" class="btn btn-default dropdown-toggle" type="button"  >
+                                Select Shown
+                            </button>
+                            <button ng-click="toggleShown(false)" class="btn btn-default dropdown-toggle" type="button" >
+                                Unselect Shown
+                            </button>
+                        </form>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <form class="navbar-form navbar-left">
+                            <button class="btn btn-info" ng-hide="showDelConfirm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" >
+                                Send Notification
+                            </button>
+                            <button class="btn btn-danger " ng-hide="showDelConfirm" ng-click="showDelConfirm = true" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" >
+                                Delete
+                            </button>
+                            <button class="btn btn-danger" ng-show="showDelConfirm" ng-click="showDelConfirm = false; deleteSelected();" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" >
+                                Confirm Delete
+                            </button>
+                            <button class="btn btn-default" ng-show="showDelConfirm" ng-click="showDelConfirm = false" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true" >
+                                Cancel
+                            </button>
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>

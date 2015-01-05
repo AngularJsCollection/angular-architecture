@@ -1502,10 +1502,10 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
          *
          * // In a config() block, you can then attach URLs with
          * // type-annotated parameters:
-         * $stateProvider.state('users', {
-   *   url: "/users",
+         * $stateProvider.state('user', {
+   *   url: "/user",
    *   // ...
-   * }).state('users.item', {
+   * }).state('user.item', {
    *   url: "/{user:dbObject}",
    *   controller: function($scope, $stateParams) {
    *     // $stateParams.user will now be an object returned from
@@ -2389,7 +2389,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
          * The builder functions that can be decorated are listed below. Though not all
          * necessarily have a good use case for decoration, that is up to you to decide.
          *
-         * In addition, users can attach custom decorators, which will generate new
+         * In addition, user can attach custom decorators, which will generate new
          * properties within the state's internal definition. There is currently no clear
          * use-case for this beyond accessing internal states (i.e. $state.$current),
          * however, expect this to become increasingly relevant as we introduce additional
@@ -2599,7 +2599,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
          *
          * examples:
          * <pre>url: "/home"
-         * url: "/users/:userid"
+         * url: "/user/:userid"
          * url: "/books/{bookid:[a-zA-Z_-]}"
          * url: "/books/{categoryid:int}"
          * url: "/books/{publishername:string}/{categoryid:int}"
@@ -4111,7 +4111,7 @@ if (typeof module !== "undefined" && typeof exports !== "undefined" && module.ex
      * <pre>
      * <ul>
      *   <li ui-sref-active="active" class="item active">
-     *     <a ui-sref="app.user({user: 'bilbobaggins'})" href="/users/bilbobaggins">@bilbobaggins</a>
+     *     <a ui-sref="app.user({user: 'bilbobaggins'})" href="/user/bilbobaggins">@bilbobaggins</a>
      *   </li>
      * </ul>
      * </pre>

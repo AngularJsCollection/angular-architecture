@@ -1,0 +1,10 @@
+<div class="location count" >
+    <h3 ng-bind="'showing ' + visibleCount + ' users'" style="text-align: center;" ></h3>
+</div>
+<div class="progress-container user">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="{{visibleCount}}" aria-valuemin="0" aria-valuemax="{{Filters.data.length}}" style="width: {{100*visibleCount/Filters.data.length}}%">
+            <span class="sr-only">{{Math.round(visibleCount*100/Filters.data.length)}}% Complete</span>
+        </div>
+    </div>
+</div>

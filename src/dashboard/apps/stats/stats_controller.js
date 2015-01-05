@@ -1,13 +1,14 @@
 angular.module('dashboard.stats', ['googlechart'])
-    .controller('StatsCtrl', ['$scope', '$http', '$q', 'DrawObj', 'GoogleChartService', function($scope, $http, $q, DrawObj, GoogleChart){
+    .controller('StatsCtrl', ['$scope', '$http', '$q', 'DrawObj', 'GoogleChartService', 'LoadingManager', function($scope, $http, $q, DrawObj, GoogleChart, Loading){
+
 
         //table thead portion
         $scope.headers = GoogleChart.getHeader();
 
         if( DrawObj.chartType == 'graph'){
-
             $scope.renderGraph(DrawObj.graphType);
             $scope.currentSelection = GoogleChart.convertHeaderObjectValue(DrawObj.graphType);
+            Loading.stop($scope.$id);
         }else if( typeof DrawObj.chartType == 'undefined' ||  DrawObj.chartType == 'table'){
             renderTable();
         }
@@ -24,10 +25,10 @@ angular.module('dashboard.stats', ['googlechart'])
             fetchData().then(function(successData,status, header, config){
                 $scope.tableData = successData.data;
                 $scope.$emit('onChangeLoadingState', false);
-                // TODO Handle Loading State as a from factory
+                Loading.stop($scope.$id);
             }, function(data, status, header, config){ // handle most errors by using status
                 $scope.$emit('onError', {isError:true, errorMessage:{ data : data, status : status}});
-                // TODO Create Error Handling Factory
+                Loading.stop($scope.$id);
             })
         }
 

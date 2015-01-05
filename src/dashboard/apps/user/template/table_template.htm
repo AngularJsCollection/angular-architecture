@@ -1,0 +1,26 @@
+<table class="detail-table pointer">
+    <thead>
+    <tr>
+        <td>Selected ({{selectedCount}})</td>
+        <td>Image</td>
+        <td ng-click="userOrder = 'fname'; reverse = !reverse">First Name</td>
+        <td ng-click="userOrder = 'lname'; reverse = !reverse">Last Name</td>
+        <td ng-click="userOrder = 'gender'; reverse = !reverse">Gender</td>
+        <td ng-click="userOrder = 'distance'; reverse = !reverse">Distance</td>
+        <td ng-click="userOrder = 'lastActiveTime'; reverse = !reverse">Last Active</td>
+        <td ng-click="userOrder = 'deviceToken'; reverse = !reverse">Has Device Token</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ui-sref="dashboard.user({uid:profile.loginid})" ng-show="profile.$_show" ng-repeat="profile in Filters.data | orderBy:userOrder:reverse" >
+        <td class="col-md-1"><input type="checkbox" ng-model="profile.$_selected" ng-click="recountSelected()"></td>
+        <td><img src="https://graph.facebook.com/{{profile.loginid}}/picture"/></td>
+        <td ng-bind="::profile.fname"></td>
+        <td ng-bind="::profile.lname"></td>
+        <td ng-bind="::profile.gender > 0 ? 'Male':'Female'"></td>
+        <td ng-bind="::profile.distance + ' miles'"></td>
+        <td ng-bind="::profile.lastActiveTime | timeDifference"></td>
+        <td><i ng-class="::profile.deviceToken.length > 0 ? 'fa fa-check green':'fa fa-remove red'"></i></td>
+    </tr>
+    </tbody>
+</table>

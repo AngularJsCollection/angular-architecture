@@ -1,0 +1,8 @@
+<h2>Users</h2>
+<ol class="breadcrumb">
+    <li><a ui-sref="dashboard.user({uid : undefined})" ng-class="uidIsLoaded ? 'pointer' : 'active pointer'">Users</a></li>
+    <li class="active" ng-show="uidIsLoaded" ng-bind="active.data.fname + ' ' + active.data.lname"></li>
+</ol>
+<user-title></user-title>
+<filter-template></filter-template>
+<table-template></table-template>
