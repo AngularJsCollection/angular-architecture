@@ -91,7 +91,11 @@ angular.module('dashboard.user', [])
         }
 
         $scope.deleteSelected = function(){
-            $scope.Filters.data.forEach(function (e,i,o) { if(e.$_selected){o.splice(i,1);} })
+            for (i = 0; i < $scope.Filters.data.length; ++i) {
+                if($scope.Filters.data[i].$_selected){
+                    $scope.Filters.data.splice(i--, 1);
+                }
+            }
             $scope.recountSelected();
             FilterManager.resetVisibleCount();
         }
