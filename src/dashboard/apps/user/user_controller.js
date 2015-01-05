@@ -1,5 +1,5 @@
-angular.module('dashboard.user', ['angular-growl', 'ngAnimate'])
-    .controller('UserCtrl', ['$scope', '$http', '$filter', 'uid', 'LoadingManager', 'FilterManager', 'growl', function($scope, $http, $filter, UID, Loading, FilterManager, growl){
+angular.module('dashboard.user', [])
+    .controller('UserCtrl', ['$scope', '$http', '$filter', 'uid', 'LoadingManager', 'FilterManager', function($scope, $http, $filter, UID, Loading, FilterManager){
 
         if(typeof UID != 'undefined' && UID != '' && UID != 'all'){ // get specific user profile
             $scope.uidIsLoaded = true;
@@ -137,11 +137,6 @@ angular.module('dashboard.user', ['angular-growl', 'ngAnimate'])
         }, function(newCurrent){
             $scope.currentFilters = newCurrent;
         }, true);
-
-        growl.addWarnMessage("This adds a warn message");
-        growl.addInfoMessage("This adds a info message");
-        growl.addSuccessMessage("This adds a success message");
-        growl.addErrorMessage("This adds a error message");
 
 
     }]);

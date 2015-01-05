@@ -91,12 +91,12 @@ var app = angular.module('dashboard', ['ui.router', 'oc.lazyLoad'])
 
                         return $stateParams.lid;
                     },
-                    getName: ['$q','$timeout', function($q, $timeout){
+                    getName: ['$q','$timeout','lid', function($q, $timeout, lid){
                         var deferred = $q.defer();
                         $timeout(function() {
                             var names = ['Cool Place', 'Awesome place', 'boring place', 'I want to be here', 'Random Venue'];
-                            deferred.resolve(names[ Math.round(Math.random()*4) ]);
-                        }, 100);
+                            deferred.resolve(names[ parseInt(lid) % 4 ]);
+                        }, Math.round(Math.random()*200));
                         return deferred.promise;
                     }],
                     name : ['lid', '$state','$stateParams','getName', function (lid, $state, $stateParams,getName) {
