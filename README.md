@@ -25,7 +25,7 @@ Creating a sustainable a large project through good practice and integration
 * ng-repeat with a limit
 
 ### 4. Use proven methods
-* Use bootstrap and steal examples
+* Use bootstrap and reliable examples
 * Use other libraries to save time
 
 ### 5. Testing
