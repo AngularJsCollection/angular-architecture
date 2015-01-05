@@ -33,16 +33,11 @@ Creating a sustainable a large project through good practice and integration
 * Unit testing
 
 
-# Contribute
-```
-
-```
-
 # License
-* [Beerware License]
+* [MIT License]
 
 [Live Demo]:http://tak215.github.io/angular-architecture/dashboard.html
-[Beerware License]:http://en.wikipedia.org/wiki/Beerware
+[MIT License]:http://en.wikipedia.org/wiki/MIT_License
 
 # TODO
 * Testing
