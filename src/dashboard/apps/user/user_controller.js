@@ -35,7 +35,6 @@ angular.module('dashboard.user', [])
                 FilterManager.init($scope.Filters.data, true);
                 FilterManager.setHeader($scope.filterKeys);
                 $scope.Filters.operators = FilterManager.operators;
-
             })
         }
 
@@ -94,6 +93,7 @@ angular.module('dashboard.user', [])
         $scope.deleteSelected = function(){
             $scope.Filters.data.forEach(function (e,i,o) { if(e.$_selected){o.splice(i,1);} })
             $scope.recountSelected();
+            FilterManager.resetVisibleCount();
         }
 
         $scope.selectedCount = 0;
