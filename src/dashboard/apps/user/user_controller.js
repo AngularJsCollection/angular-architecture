@@ -139,4 +139,4 @@ angular.module('dashboard.user', [])
         }, true);
 
 
-    }]);
+    }])

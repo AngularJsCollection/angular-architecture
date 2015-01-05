@@ -67,13 +67,19 @@ var app = angular.module('dashboard', ['ui.router', 'oc.lazyLoad'])
                     ctrl : function($ocLazyLoad) {
                         return $ocLazyLoad.load({
                             name: "dashboard.user",
+                            serie: true,
                             files: ['apps/user/user_controller.js','apps/user/js/user_directive.js', 'apps/user/style/user_style.css']
                         });
                     },
                     uid : ['$stateParams','ctrl', function($stateParams, ctrl){
                         return $stateParams.uid;
                     }]
+                },
+                onEnter: function(){
+                    console.log('hello');
+                    return;
                 }
+
             })
             .state('dashboard.location', {
                 templateUrl : "apps/location/template/location_template.htm",
